@@ -29,12 +29,12 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
     ViewModule,
 
 
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
+    // // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // // and returns simulated server responses.
+    // // Remove it when a real server is ready to receive requests.
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // ),
 
     BrowserAnimationsModule
   ],
