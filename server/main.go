@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -45,8 +46,17 @@ func heroHandler(c *gin.Context) {
 	// res.Write(HJ)
 }
 func detailHandler(c *gin.Context) {
-	// io.WriteString(res, string(Heroes))
-	// HJ, _ := json.Marshal(Heroes)
-	c.JSON(http.StatusOK, Heroes)
+	p := c.Param("id")
+	id, _ := strconv.Atoi(p)
+	hero := Hero{}
+	fmt.Println(id)
+	for _, v := range Heroes {
+		if id == v.Id {
+			hero.Id = v.Id
+			hero.Name = v.Name
+		}
+	}
+
+	c.JSON(http.StatusOK, hero)
 	// res.Write(HJ)
 }
