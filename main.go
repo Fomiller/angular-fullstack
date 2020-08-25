@@ -1,13 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
 
-	"github.com/thoas/go-funk"
-
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -35,9 +33,13 @@ func init() {
 }
 
 func main() {
+	// create gin router
 	router := gin.Default()
+	// serve frontend static files
+	router.Use(static.Serve("/", static.LocalFile("./angular-tour-of-heroes/dist/angular-tour-of-heroes", true)))
+
 	router.GET("/api/heroes", heroHandler)
-	router.PUT("/api/heroes", updateHandler)
+	// router.PUT("/api/heroes", updateHandler)
 	router.GET("/api/heroes/:id", detailHandler)
 	router.Run(":8080")
 }
@@ -65,11 +67,11 @@ func detailHandler(c *gin.Context) {
 	// res.Write(HJ)
 }
 
-func updateHandler(c *gin.Context) {
-	body := c.Request.Body
-	hero := Hero{}
-	json.NewDecoder(body).Decode(&hero)
-	i := funk.Get(Heroes, hero.Id)
-	fmt.Println(i)
-	fmt.Println(hero)
-}
+// func updateHandler(c *gin.Context) {
+// 	body := c.Request.Body
+// 	hero := Hero{}
+// 	json.NewDecoder(body).Decode(&hero)
+// 	i := funk.Get(Heroes, hero.Id)
+// 	fmt.Println(i)
+// 	fmt.Println(hero)
+// }
