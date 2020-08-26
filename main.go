@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -39,18 +40,18 @@ func main() {
 	router.Use(static.Serve("/", static.LocalFile("./angular-tour-of-heroes/dist/angular-tour-of-heroes", true)))
 
 	router.GET("/api/heroes", heroHandler)
-	// router.PUT("/api/heroes", updateHandler)
+	router.PUT("/api/heroes", updateHandler)
 	router.GET("/api/heroes/:id", detailHandler)
 	router.Run(":8080")
 }
 
+// return all heroes
 func heroHandler(c *gin.Context) {
-	// io.WriteString(res, string(Heroes))
-	// HJ, _ := json.Marshal(Heroes)
 	c.JSON(http.StatusOK, Heroes)
-
-	// res.Write(HJ)
 }
+
+// return a single hero
+// could use index position?
 func detailHandler(c *gin.Context) {
 	p := c.Param("id")
 	id, _ := strconv.Atoi(p)
@@ -62,16 +63,21 @@ func detailHandler(c *gin.Context) {
 			hero.Name = v.Name
 		}
 	}
-
 	c.JSON(http.StatusOK, hero)
-	// res.Write(HJ)
 }
 
-// func updateHandler(c *gin.Context) {
-// 	body := c.Request.Body
-// 	hero := Hero{}
-// 	json.NewDecoder(body).Decode(&hero)
-// 	i := funk.Get(Heroes, hero.Id)
-// 	fmt.Println(i)
-// 	fmt.Println(hero)
-// }
+// update hero name
+func updateHandler(c *gin.Context) {
+	// parse request body
+	body := c.Request.Body
+	// create hero strucy to decode to
+	hero := Hero{}
+	// decode body
+	json.NewDecoder(body).Decode(&hero)
+	// replace name of hero that matches post hero
+	for i, _ := range Heroes {
+		if Heroes[i].Id == hero.Id {
+			Heroes[i].Name = hero.Name
+		}
+	}
+}
