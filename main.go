@@ -90,7 +90,7 @@ func detailHandler(c *gin.Context) {
 // 			Heroes = RemoveIndex(Heroes, i)
 // 		}
 // 	}
-}
+// }
 
 // update hero name
 func updateHandler(c *gin.Context) {
