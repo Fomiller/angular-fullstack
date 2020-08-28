@@ -43,7 +43,7 @@ func main() {
 	router.POST("/api/heroes", addHandler)
 	router.PUT("/api/heroes", updateHandler)
 	router.GET("/api/heroes/:id", detailHandler)
-	// router.DELETE("/api/heroes/:id", deleteHandler)
+	router.DELETE("/api/heroes/:id", deleteHandler)
 	router.Run(":8080")
 }
 
@@ -81,16 +81,18 @@ func detailHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, hero)
 }
 
-// // Delete handler
-// func deleteHandler(c *gin.Context) {
-// 	p := c.Param("id")
-// 	matchId, _ := strconv.Atoi(p)
-// 	for i, _ := range Heroes {
-// 		if Heroes[i].Id == matchId {
-// 			Heroes = RemoveIndex(Heroes, i)
-// 		}
-// 	}
-// }
+// Delete handler
+func deleteHandler(c *gin.Context) {
+	p := c.Param("id")
+	matchId, _ := strconv.Atoi(p)
+	for i, _ := range Heroes {
+		if Heroes[i].Id == matchId {
+			Heroes = RemoveIndex(Heroes, i)
+		}
+	}
+	// c.JSON(http.StatusOK, hero)
+	c.Status(http.StatusOK)
+}
 
 // update hero name
 func updateHandler(c *gin.Context) {
