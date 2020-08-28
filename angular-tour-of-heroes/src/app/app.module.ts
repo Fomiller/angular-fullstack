@@ -11,10 +11,6 @@ import { ViewModule } from './view/view.module';
 
 import { AppComponent } from './app.component';
 
-import { InMemoryDataService } from './in-memory-data.service';
-
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-
 @NgModule({
   declarations: [
     AppComponent,
