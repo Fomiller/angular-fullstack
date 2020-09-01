@@ -67,7 +67,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-tour-of-heroes:build:production"
+              "browserTarget": "angular-tour-of-heroes:build:production",
+              "proxyConfig": "proxy.config.json"
             }
           }
         },
