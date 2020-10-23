@@ -37,7 +37,7 @@ func main() {
 	// create gin router
 	router := gin.Default()
 	// serve frontend static files
-	router.Use(static.Serve("/", static.LocalFile("./angular-tour-of-heroes/dist/angular-tour-of-heroes", true)))
+	router.Use(static.Serve("/dashboard", static.LocalFile("./angular-tour-of-heroes/dist/angular-tour-of-heroes", true)))
 
 	router.GET("/api/heroes", heroHandler)
 	router.POST("/api/heroes", addHandler)
